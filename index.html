@@ -310,19 +310,21 @@
 <!-- Mobile Navigation Styles -->
 <style>
 	#mobile-nav-toggle {
-		display: none;
-		position: fixed;
-		top: 15px;
-		right: 15px;
-		width: 50px;
-		height: 45px;
-		cursor: pointer;
-		z-index: 99999;
-		padding: 10px;
-		background: #312450;
-		border-radius: 4px;
-		border: 2px solid #b74e91;
-		box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+		position: fixed !important;
+		display: block !important;
+		visibility: visible !important;
+		opacity: 1 !important;
+		top: 15px !important;
+		right: 15px !important;
+		width: 50px !important;
+		height: 45px !important;
+		cursor: pointer !important;
+		z-index: 2147483647 !important;
+		padding: 10px !important;
+		background: #ff0000 !important;
+		border-radius: 4px !important;
+		border: 3px solid #ffffff !important;
+		box-shadow: 0 2px 20px rgba(0,0,0,0.9) !important;
 	}
 
 	#mobile-nav-toggle span {
