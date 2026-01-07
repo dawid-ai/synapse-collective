@@ -13,6 +13,13 @@
 	</head>
 	<body class="is-preload">
 
+		<!-- Mobile Nav Toggle -->
+		<div id="mobile-nav-toggle">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+
 		<!-- Sidebar -->
 			<section id="sidebar">
 				<div class="inner">
@@ -307,6 +314,67 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 
+<!-- Mobile Navigation Styles -->
+<style>
+	#mobile-nav-toggle {
+		display: none;
+		position: fixed;
+		top: 15px;
+		right: 15px;
+		width: 40px;
+		height: 35px;
+		cursor: pointer;
+		z-index: 10001;
+		padding: 8px;
+		background: rgba(49, 36, 80, 0.95);
+		border-radius: 4px;
+	}
+
+	#mobile-nav-toggle span {
+		display: block;
+		height: 3px;
+		width: 100%;
+		background: #fff;
+		margin: 5px 0;
+		border-radius: 2px;
+		transition: all 0.3s ease;
+	}
+
+	#mobile-nav-toggle.active span:nth-child(1) {
+		transform: rotate(45deg) translate(5px, 8px);
+	}
+
+	#mobile-nav-toggle.active span:nth-child(2) {
+		opacity: 0;
+	}
+
+	#mobile-nav-toggle.active span:nth-child(3) {
+		transform: rotate(-45deg) translate(5px, -8px);
+	}
+
+	@media screen and (max-width: 736px) {
+		#mobile-nav-toggle {
+			display: block;
+		}
+
+		#sidebar {
+			display: block !important;
+			transform: translateX(-100%);
+			transition: transform 0.3s ease;
+			width: 80%;
+			max-width: 300px;
+		}
+
+		#sidebar.mobile-visible {
+			transform: translateX(0);
+		}
+
+		#sidebar > .inner {
+			padding-top: 60px;
+		}
+	}
+</style>
+
 <!-- Add this minimal CSS to your main.css or in the head section -->
 <style>
 	.popup-overlay {
@@ -475,6 +543,38 @@
 			errorMsg.style.display = 'none';
 		}, 5000);
 	}
+	</script>
+
+	<!-- Mobile Navigation Toggle Script -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const toggle = document.getElementById('mobile-nav-toggle');
+		const sidebar = document.getElementById('sidebar');
+
+		if (toggle && sidebar) {
+			toggle.addEventListener('click', function() {
+				toggle.classList.toggle('active');
+				sidebar.classList.toggle('mobile-visible');
+			});
+
+			// Close sidebar when clicking a link
+			const navLinks = sidebar.querySelectorAll('nav a');
+			navLinks.forEach(function(link) {
+				link.addEventListener('click', function() {
+					toggle.classList.remove('active');
+					sidebar.classList.remove('mobile-visible');
+				});
+			});
+
+			// Close sidebar when clicking outside
+			document.addEventListener('click', function(e) {
+				if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+					toggle.classList.remove('active');
+					sidebar.classList.remove('mobile-visible');
+				}
+			});
+		}
+	});
 	</script>
 
 	</body>
