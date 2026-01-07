@@ -13,13 +13,6 @@
 	</head>
 	<body class="is-preload">
 
-		<!-- Mobile Nav Toggle -->
-		<div id="mobile-nav-toggle">
-			<span></span>
-			<span></span>
-			<span></span>
-		</div>
-
 		<!-- Sidebar -->
 			<section id="sidebar">
 				<div class="inner">
@@ -553,6 +546,13 @@
 	}
 	</script>
 
+	<!-- Mobile Nav Toggle (placed at end for z-index stacking) -->
+	<div id="mobile-nav-toggle">
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+
 	<!-- Mobile Navigation Toggle Script -->
 	<script>
 	document.addEventListener('DOMContentLoaded', function() {
@@ -560,7 +560,9 @@
 		const sidebar = document.getElementById('sidebar');
 
 		if (toggle && sidebar) {
-			toggle.addEventListener('click', function() {
+			toggle.addEventListener('click', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
 				toggle.classList.toggle('active');
 				sidebar.classList.toggle('mobile-visible');
 			});
