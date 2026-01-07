@@ -13,6 +13,17 @@
 	</head>
 	<body class="is-preload">
 
+		<!-- Top Navigation -->
+		<nav id="top-nav">
+			<a href="#intro" class="logo">SYNAPSE</a>
+			<ul>
+				<li><a href="#one">About</a></li>
+				<li><a href="#two">What We Do</a></li>
+				<li><a href="dialogue.html">Dialogue</a></li>
+				<li><a href="#three">Contact</a></li>
+			</ul>
+		</nav>
+
 		<!-- Sidebar -->
 			<section id="sidebar">
 				<div class="inner">
@@ -307,73 +318,79 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 
-<!-- Mobile Navigation Styles -->
+<!-- Top Navigation Bar -->
 <style>
-	#mobile-nav-toggle {
-		position: fixed !important;
-		display: block !important;
-		visibility: visible !important;
-		opacity: 1 !important;
-		top: 15px !important;
-		right: 15px !important;
-		width: 50px !important;
-		height: 45px !important;
-		cursor: pointer !important;
-		z-index: 2147483647 !important;
-		padding: 10px !important;
-		background: #ff0000 !important;
-		border-radius: 4px !important;
-		border: 3px solid #ffffff !important;
-		box-shadow: 0 2px 20px rgba(0,0,0,0.9) !important;
+	#top-nav {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		background: #312450;
+		padding: 10px 20px;
+		z-index: 99999;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border-bottom: 1px solid #5e42a6;
+		flex-wrap: wrap;
 	}
 
-	#mobile-nav-toggle span {
-		display: block;
-		height: 3px;
-		width: 100%;
-		background: #fff;
-		margin: 6px 0;
-		border-radius: 2px;
-		transition: all 0.3s ease;
-		pointer-events: none;
+	#top-nav .logo {
+		color: #fff;
+		font-weight: bold;
+		font-size: 0.9em;
+		text-decoration: none;
+		letter-spacing: 0.1em;
 	}
 
-	#mobile-nav-toggle.active span:nth-child(1) {
-		transform: rotate(45deg) translate(6px, 9px);
+	#top-nav ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		gap: 15px;
+		flex-wrap: wrap;
 	}
 
-	#mobile-nav-toggle.active span:nth-child(2) {
-		opacity: 0;
+	#top-nav ul li a {
+		color: rgba(255,255,255,0.7);
+		text-decoration: none;
+		font-size: 0.75em;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		transition: color 0.2s;
 	}
 
-	#mobile-nav-toggle.active span:nth-child(3) {
-		transform: rotate(-45deg) translate(6px, -9px);
+	#top-nav ul li a:hover {
+		color: #fff;
 	}
 
-	@media screen and (max-width: 736px) {
-		#mobile-nav-toggle {
-			display: block !important;
+	/* Hide sidebar on all devices now */
+	#sidebar {
+		display: none !important;
+	}
+
+	/* Adjust wrapper margin */
+	#sidebar + #wrapper {
+		margin-left: 0 !important;
+	}
+
+	/* Add top padding to body for fixed nav */
+	#wrapper > section:first-child {
+		padding-top: 60px;
+	}
+
+	@media screen and (max-width: 600px) {
+		#top-nav {
+			padding: 8px 15px;
 		}
 
-		#sidebar {
-			display: block !important;
-			transform: translateX(-100%);
-			transition: transform 0.3s ease;
-			width: 80% !important;
-			max-width: 300px !important;
-			z-index: 99998 !important;
+		#top-nav ul {
+			gap: 10px;
 		}
 
-		#sidebar.mobile-visible {
-			transform: translateX(0) !important;
-		}
-
-		#sidebar > .inner {
-			padding-top: 60px;
-		}
-
-		#wrapper {
-			margin-left: 0 !important;
+		#top-nav ul li a {
+			font-size: 0.65em;
 		}
 	}
 </style>
@@ -546,47 +563,6 @@
 			errorMsg.style.display = 'none';
 		}, 5000);
 	}
-	</script>
-
-	<!-- Mobile Nav Toggle (placed at end for z-index stacking) -->
-	<div id="mobile-nav-toggle">
-		<span></span>
-		<span></span>
-		<span></span>
-	</div>
-
-	<!-- Mobile Navigation Toggle Script -->
-	<script>
-	document.addEventListener('DOMContentLoaded', function() {
-		const toggle = document.getElementById('mobile-nav-toggle');
-		const sidebar = document.getElementById('sidebar');
-
-		if (toggle && sidebar) {
-			toggle.addEventListener('click', function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				toggle.classList.toggle('active');
-				sidebar.classList.toggle('mobile-visible');
-			});
-
-			// Close sidebar when clicking a link
-			const navLinks = sidebar.querySelectorAll('nav a');
-			navLinks.forEach(function(link) {
-				link.addEventListener('click', function() {
-					toggle.classList.remove('active');
-					sidebar.classList.remove('mobile-visible');
-				});
-			});
-
-			// Close sidebar when clicking outside
-			document.addEventListener('click', function(e) {
-				if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
-					toggle.classList.remove('active');
-					sidebar.classList.remove('mobile-visible');
-				}
-			});
-		}
-	});
 	</script>
 
 	</body>
